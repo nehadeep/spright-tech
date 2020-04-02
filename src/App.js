@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from "./Person/Person";
-import styled from "styled-components";
+import Persons from "./Persons/Persons";
+import Cockpit from "./Cockpit/Cockpit";
 
 class App extends Component{
     state = {
@@ -41,34 +41,24 @@ class App extends Component{
     };
 
     render() {
-        const StyledButton = styled.button`
-            cursor : pointer;
-            background-color: ${props=>props.alt?'blue': 'red'};
-            color: white;
-            &:hover: {
-                background-color: lightgreen;
-                color: black;
-            }
-        `;
+        // const StyledButton = styled.button`
+        //     cursor : pointer;
+        //     background-color: ${props=>props.alt?'blue': 'red'};
+        //     color: white;
+        //     &:hover: {
+        //         background-color: lightgreen;
+        //         color: black;
+        //     }
+        // `;
         let person = null;
         if(this.state.isShow) {
-            person = (
-            <div>
-                {this.state.persons.map((p, index)=>{
-                   return <Person name={p.name} age={p.age} click={()=>this.deletePerson(index)} key={p.id}/>
-                })}
-            </div>
-            );
+            person = <Persons persons={this.state.persons}  clicked={this.deletePerson}/>
 
         }
         return (
             <div className="App">
-                <header className="App-header">
-                    <h1> Welcome to my First React app.</h1>
-                </header>
-                <StyledButton alt={this.state.isShow} onClick={this.toggle}>toggle </StyledButton>
-                {person}
-
+            <Cockpit showPersons = {this.state.isShow} clicked = {this.toggle}/>
+            {person}
             </div>
         );
     }
