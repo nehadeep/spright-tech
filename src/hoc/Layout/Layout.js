@@ -10,7 +10,7 @@ class Layout  extends Component{
         showSideDrawer: false
     };
     sideDrawerClosed =()=>{
-        this.setState({showSideDrawer: true})
+        this.setState({showSideDrawer: false})
     };
     SideDrawerToggleClicked = ()=>{
         this.setState((prevState)=>{
