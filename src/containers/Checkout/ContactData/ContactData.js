@@ -33,10 +33,11 @@ class ContactData extends Component{
                 email: 'kaur@test.com'
 
             },
-            deliveryMethod: 'fastest'
+            deliveryMethod: 'fastest',
+            userId: this.props.userId
         };
 
-        this.props.onOrderBurger(order)
+        this.props.onOrderBurger(this.props.token,order)
 
         // axiosIns.post('/orders.json', order).then(response=>{
         //
@@ -74,14 +75,16 @@ const mapStateToProps = state => {
     return {
         ings : state.burgerBuilder.ingredient,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.authReducer.token,
+        userId: state.authReducer.userId
     }
 };
 
 const mapDispatchToProps  = dispatch => {
     return {
 
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (token,orderData) => dispatch(actions.purchaseBurger(token,orderData))
     }
 
 };

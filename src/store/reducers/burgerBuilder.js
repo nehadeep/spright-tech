@@ -1,10 +1,11 @@
 import * as actionType from '../actions/actionsTypes';
-import {updatedObject} from "../utility";
+import {updatedObject} from "../../Shared/utility";
 
 const initialState = {
     ingredient :null,
     totalPrice: 4,
-    error: false
+    error: false,
+    building: false
 };
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -20,7 +21,8 @@ const reducer = (state=initialState, action)=>{
              const updatedIngredients = updatedObject(state.ingredient, updatedIngredient);
              const updatedState ={
                  ingredient: updatedIngredients,
-                 totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+                 totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+                 building: true
              };
              return updatedObject(state, updatedState)
          case actionType.REMOVE_INGREDIENT:
@@ -30,7 +32,9 @@ const reducer = (state=initialState, action)=>{
                      ...state.ingredient,
                      [action.ingredientName]: state.ingredient[action.ingredientName] -1
                  },
-                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+                 building: true
+
 
              };
          case actionType.SET_INGREDIENTS:
@@ -38,7 +42,9 @@ const reducer = (state=initialState, action)=>{
                  ...state,
                  ingredient: action.ingredients,
                  totalPrice: 4,
-                 error: false
+                 error: false,
+                 building: false
+
              };
          case actionType.FAILED:
              return {

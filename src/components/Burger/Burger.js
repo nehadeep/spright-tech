@@ -11,7 +11,6 @@ const  burger = (props) => {
         }).reduce((arr, el)=>{
             return arr.concat(el)
         }, []);
-    console.log("map", transformedIngre);
 
     if(transformedIngre.length===0){
 
